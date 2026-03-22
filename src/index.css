@@ -144,92 +144,6 @@ html, body {
 }
 .filter-btn.on:hover { background: #4a4a42; }
 
-/* ── Database container ── */
-.db-card {
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  overflow: hidden;
-  transition: border-color 100ms ease;
-}
-.db-card:hover { border-color: var(--border-strong); }
-
-/* ── Table ── */
-.db-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.875rem;
-}
-
-thead th {
-  background: var(--bg-primary);
-  border-bottom: 1px solid var(--border-strong);
-  padding: 0;
-  white-space: nowrap;
-}
-.th-cell {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  user-select: none;
-}
-.th-cell i { font-size: 10px; }
-
-tbody tr {
-  border-bottom: 1px solid var(--border);
-  transition: background 80ms ease;
-  cursor: pointer;
-}
-tbody tr:last-child { border-bottom: none; }
-tbody tr:hover { background: var(--bg-hover); }
-
-td {
-  padding: 8px 12px;
-  vertical-align: middle;
-}
-
-/* Column widths */
-.col-num   { width: 40px;  text-align: center; }
-.col-name  { min-width: 0; }
-.col-date  { width: 104px; }
-.col-type  { width: 118px; text-align: center; }
-.col-place { width: 90px;  text-align: center; }
-.col-score { width: 72px;  text-align: center; }
-.col-arrow { width: 32px;  text-align: center; }
-
-.row-arrow {
-  font-size: 10px;
-  color: var(--text-placeholder);
-  opacity: 0;
-  transition: opacity 100ms ease, transform 100ms ease;
-}
-tbody tr:hover .row-arrow {
-  opacity: 1;
-  transform: translateX(2px);
-}
-
-/* Cells */
-.cell-num {
-  font-size: 0.8125rem;
-  color: var(--text-placeholder);
-  font-variant-numeric: tabular-nums;
-}
-.cell-name {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-primary);
-}
-.cell-date {
-  font-size: 0.8125rem;
-  color: var(--text-secondary);
-  font-variant-numeric: tabular-nums;
-}
 
 /* ── Tags ── */
 .tag {
@@ -414,11 +328,7 @@ tbody tr:hover .row-arrow {
   white-space: pre-wrap;
 }
 
-/* ── Desktop / Mobile visibility ── */
-.desktop-only { display: block; }
-.mobile-only  { display: none; }
-
-/* ── Mobile card list ── */
+/* ── Card list ── */
 .card-list {
   display: flex;
   flex-direction: column;
@@ -482,9 +392,7 @@ tbody tr:hover .row-arrow {
 
 /* ── Responsive ── */
 @media (max-width: 640px) {
-  .page {
-    padding: 40px 20px 60px;
-  }
+  .page { padding: 40px 20px 60px; }
   .page-title { font-size: 1.75rem; }
 
   .page-header-row {
@@ -492,11 +400,9 @@ tbody tr:hover .row-arrow {
     align-items: flex-start;
     gap: 12px;
   }
-
   .subject-switch { margin-top: 0; }
 
   .filter-label { display: none; }
-
   .filter-row {
     overflow-x: auto;
     flex-wrap: nowrap;
@@ -506,9 +412,6 @@ tbody tr:hover .row-arrow {
     -webkit-overflow-scrolling: touch;
   }
   .filter-row::-webkit-scrollbar { display: none; }
-
-  .desktop-only { display: none; }
-  .mobile-only  { display: block; }
 
   .modal-backdrop { align-items: flex-end; padding: 0; }
   .modal {

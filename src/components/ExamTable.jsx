@@ -1,8 +1,30 @@
 import ExamCard from './ExamCard'
 
+function SkeletonCard() {
+  return (
+    <div className="exam-card skeleton-card">
+      <div className="exam-card-top">
+        <span className="skeleton" style={{ width: '55%', height: '16px' }} />
+      </div>
+      <div className="exam-card-bottom">
+        <div className="exam-card-tags">
+          <span className="skeleton" style={{ width: '72px' }} />
+          <span className="skeleton" style={{ width: '52px' }} />
+          <span className="skeleton" style={{ width: '44px' }} />
+        </div>
+        <span className="skeleton" style={{ width: '32px' }} />
+      </div>
+    </div>
+  )
+}
+
 export default function ExamTable({ rows, loading, error, onRowClick }) {
   if (loading) {
-    return <div className="state-card"><i className="state-icon fa-solid fa-circle-notch fa-spin" /></div>
+    return (
+      <div className="card-list">
+        {Array.from({ length: 5 }).map((_, i) => <SkeletonCard key={i} />)}
+      </div>
+    )
   }
   if (error) {
     return (

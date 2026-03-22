@@ -328,6 +328,27 @@ html, body {
   white-space: pre-wrap;
 }
 
+/* ── Skeleton ── */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
+}
+.skeleton {
+  display: inline-block;
+  height: 13px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--bg-hover) 25%,
+    var(--border)   50%,
+    var(--bg-hover) 75%
+  );
+  background-size: 600px 100%;
+  animation: shimmer 1.4s ease infinite;
+}
+.skeleton-card { pointer-events: none; }
+.skeleton-card .exam-card-top { margin-bottom: 10px; }
+
 /* ── Card list ── */
 .card-list {
   display: flex;

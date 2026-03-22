@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
+  <rect width="1200" height="630" fill="#ffffff"/>
+  <rect x="80" y="80" width="1040" height="470" rx="12" fill="#f7f7f5"/>
+  <text x="120" y="290" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="700" fill="#37352f">모의고사 시행표</text>
+  <text x="122" y="370" font-family="system-ui, -apple-system, sans-serif" font-size="36" fill="#9b9a97">수학 · 국어 모의고사 기록</text>
+</svg>

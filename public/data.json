@@ -1,0 +1,32 @@
+[
+    {
+        "id": "example1",
+        "name": "시대인재 브릿지 01",
+        "date": "2026-03-14",
+        "subject": "math",
+        "type": "half",
+        "place": "live",
+        "score": "6/10",
+        "memo": "초반에 막혀서 멘탈이 나갔었다. 침착함을 유지했다ㅍ면 어렵지 않은 시험이었다"
+    },
+    {
+        "id": "example2",
+        "name": "2024 고3 3월 모의고사",
+        "date": "2026-03-15",
+        "subject": "math",
+        "type": "full",
+        "place": "home",
+        "score": "84",
+        "memo": "76점 확보까지는 50분 걸렸다. 수열의 극한으로 위장한 도형극한.. 그게 문제였다"
+    },
+    {
+        "id": "example3",
+        "name": "시대인재 브릿지 02",
+        "date": "2026-03-21",
+        "subject": "math",
+        "type": "half",
+        "place": "live",
+        "score": "8/10",
+        "memo": "공통이 나쁘지 않았는데, 계산이 좀 걸렸다."
+    }
+]

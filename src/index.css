@@ -495,10 +495,14 @@ tbody tr:hover .row-arrow {
 
   .subject-switch { margin-top: 0; }
 
+  .filter-label { display: none; }
+
   .filter-row {
     overflow-x: auto;
     flex-wrap: nowrap;
-    padding-bottom: 4px;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding: 0 20px 4px;
     -webkit-overflow-scrolling: touch;
   }
   .filter-row::-webkit-scrollbar { display: none; }

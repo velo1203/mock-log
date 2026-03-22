@@ -414,12 +414,106 @@ tbody tr:hover .row-arrow {
   white-space: pre-wrap;
 }
 
-/* ── Responsive ── */
-@media (max-width: 800px) {
-  .page { padding: 48px 24px 64px; }
-  .col-date { display: none; }
+/* ── Desktop / Mobile visibility ── */
+.desktop-only { display: block; }
+.mobile-only  { display: none; }
+
+/* ── Mobile card list ── */
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
-@media (max-width: 480px) {
-  .page { padding: 32px 16px 48px; }
-  .page-title { font-size: 1.875rem; }
+
+.exam-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: background 80ms ease, border-color 80ms ease;
+}
+.exam-card:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-strong);
+}
+.exam-card:active { background: var(--bg-hover); }
+
+.exam-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.exam-card-name {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.exam-card-arrow {
+  font-size: 10px;
+  color: var(--text-placeholder);
+  flex-shrink: 0;
+}
+.exam-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.exam-card-tags {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.exam-card-date {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.state-card {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .page {
+    padding: 40px 20px 60px;
+  }
+  .page-title { font-size: 1.75rem; }
+
+  .page-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .subject-switch { margin-top: 0; }
+
+  .filter-row {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .filter-row::-webkit-scrollbar { display: none; }
+
+  .desktop-only { display: none; }
+  .mobile-only  { display: block; }
+
+  .modal-backdrop { align-items: flex-end; padding: 0; }
+  .modal {
+    border-radius: 12px 12px 0 0;
+    max-width: 100%;
+    animation: slide-up-mobile 200ms ease;
+  }
+  @keyframes slide-up-mobile {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+  }
 }

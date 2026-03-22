@@ -48,7 +48,7 @@ export default function App() {
   const [selected, setSelected] = useState(null)
 
   useEffect(() => {
-    const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR11Yg_33Qjn2BkcbgVg-VjCjvdtjvnaioc615NFDEzsJvFMym3Cl6Y88dOfyBUFCOPgVU2Ss27xUaf/pub?output=csv'
+    const CSV_URL = import.meta.env.VITE_CSV_URL
     fetch(CSV_URL)
       .then(r => { if (!r.ok) throw new Error(); return r.text() })
       .then(csv => { setAll(parseCsv(csv)); setLoading(false) })

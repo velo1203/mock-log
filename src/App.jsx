@@ -5,6 +5,24 @@ import FilterBar from './components/FilterBar'
 import ExamTable from './components/ExamTable'
 import DetailModal from './components/DetailModal'
 
+function parseCsv(text) {
+  const lines = text.trim().split('\n')
+  const headers = lines[0].split(',').map(h => h.trim())
+  return lines.slice(1).map(line => {
+    const values = []
+    let cur = '', inQuote = false
+    for (const ch of line) {
+      if (ch === '"') { inQuote = !inQuote }
+      else if (ch === ',' && !inQuote) { values.push(cur.trim()); cur = '' }
+      else { cur += ch }
+    }
+    values.push(cur.trim())
+    const obj = {}
+    headers.forEach((h, i) => { obj[h] = values[i] ?? '' })
+    return obj
+  }).filter(row => row.name)
+}
+
 function getFiltered(all, subject, filter) {
   let data = all.filter(e => e.subject === subject)
   if (filter === 'full') return data.filter(e => e.type === 'full')
@@ -30,9 +48,10 @@ export default function App() {
   const [selected, setSelected] = useState(null)
 
   useEffect(() => {
-    fetch('data.json?_=' + Date.now())
-      .then(r => { if (!r.ok) throw new Error(); return r.json() })
-      .then(data => { setAll(Array.isArray(data) ? data : []); setLoading(false) })
+    const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR11Yg_33Qjn2BkcbgVg-VjCjvdtjvnaioc615NFDEzsJvFMym3Cl6Y88dOfyBUFCOPgVU2Ss27xUaf/pub?output=csv'
+    fetch(CSV_URL)
+      .then(r => { if (!r.ok) throw new Error(); return r.text() })
+      .then(csv => { setAll(parseCsv(csv)); setLoading(false) })
       .catch(() => { setError(true); setLoading(false) })
   }, [])
 

@@ -404,8 +404,9 @@ html, body {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.review-card-footer {
-  margin-top: 2px;
+.review-card-category {
+  font-size: 0.75rem;
+  color: var(--text-placeholder);
 }
 
 

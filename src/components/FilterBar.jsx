@@ -1,7 +1,7 @@
 const FILTERS = [
   { key: 'all',  icon: 'fa-solid fa-border-all',          label: '전체' },
-  { key: 'full', icon: 'fa-regular fa-circle',            label: '풀모의고사' },
-  { key: 'half', icon: 'fa-solid fa-circle-half-stroke',  label: '하프모의고사' },
+  { key: 'full', icon: 'fa-regular fa-circle',            label: '풀모' },
+  { key: 'half', icon: 'fa-solid fa-circle-half-stroke',  label: '하프모' },
   { key: 'live', icon: 'fa-regular fa-building',          label: '현장' },
   { key: 'home', icon: 'fa-solid fa-house',               label: '집모' },
 ]

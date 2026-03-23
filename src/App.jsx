@@ -124,7 +124,7 @@ export default function App() {
             )}
           </div>
         </div>
-        <div className="divider" />
+        {page === 'exam' && <div className="divider" />}
         {page === 'exam' && (
           <>
             <FilterBar filter={filter} onFilter={setFilter} search={search} onSearch={setSearch} />

@@ -318,9 +318,8 @@ html, body {
   color: var(--green);
 }
 .tag-home {
-  background: var(--bg-hover);
+  background: rgba(155, 154, 151, 0.15);
   color: var(--text-secondary);
-  border: 1px solid var(--border-strong);
 }
 
 /* ── Score ── */

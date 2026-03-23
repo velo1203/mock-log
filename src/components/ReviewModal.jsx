@@ -24,8 +24,11 @@ export default function ReviewModal({ review, onClose }) {
         </div>
         <div className="modal-body">
           {category && (
-            <div style={{ marginBottom: '12px' }}>
-              <span className="tag tag-home">{category}</span>
+            <div className="detail-grid">
+              <div className="detail-row">
+                <span className="detail-label"><i className="fa-solid fa-tag" /> 분류</span>
+                <span className="tag tag-home">{category}</span>
+              </div>
             </div>
           )}
           {body && (

@@ -8,7 +8,7 @@ function fmtDate(d) {
 }
 
 export default function ReviewModal({ review, onClose }) {
-  const { title, date, category, tier, rating, review: body } = review
+  const { title, date, category, tier, review: body } = review
 
   useEffect(() => {
     const handler = e => { if (e.key === 'Escape') onClose() }
@@ -38,12 +38,6 @@ export default function ReviewModal({ review, onClose }) {
               <div className="detail-row">
                 <span className="detail-label"><i className="fa-solid fa-tag" /> 분류</span>
                 <span className="detail-value">{category}</span>
-              </div>
-            )}
-            {rating && (
-              <div className="detail-row">
-                <span className="detail-label"><i className="fa-solid fa-star" /> 평점</span>
-                <span className="detail-value review-rating">{rating}<i className="fa-solid fa-star" /></span>
               </div>
             )}
           </div>

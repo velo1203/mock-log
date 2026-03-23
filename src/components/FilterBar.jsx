@@ -9,21 +9,6 @@ const FILTERS = [
 export default function FilterBar({ filter, onFilter, search, onSearch }) {
   return (
     <div className="filter-area">
-      <div className="search-row">
-        <i className="fa-solid fa-magnifying-glass search-icon" />
-        <input
-          className="search-input"
-          type="text"
-          placeholder="시험 이름 검색..."
-          value={search}
-          onChange={e => onSearch(e.target.value)}
-        />
-        {search && (
-          <button className="search-clear" onClick={() => onSearch('')}>
-            <i className="fa-solid fa-xmark" />
-          </button>
-        )}
-      </div>
       <div className="filter-row">
         <span className="filter-label">
           <i className="fa-solid fa-sliders" /> 필터
@@ -37,6 +22,21 @@ export default function FilterBar({ filter, onFilter, search, onSearch }) {
             <i className={f.icon} /> {f.label}
           </button>
         ))}
+      </div>
+      <div className="search-row">
+        <i className="fa-solid fa-magnifying-glass search-icon" />
+        <input
+          className="search-input"
+          type="text"
+          placeholder="검색..."
+          value={search}
+          onChange={e => onSearch(e.target.value)}
+        />
+        {search && (
+          <button className="search-clear" onClick={() => onSearch('')}>
+            <i className="fa-solid fa-xmark" />
+          </button>
+        )}
       </div>
     </div>
   )

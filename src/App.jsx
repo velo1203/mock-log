@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Header from './components/Header'
 import PageHeader from './components/PageHeader'
 import SubjectSwitch from './components/SubjectSwitch'
@@ -59,7 +60,10 @@ function useCsv(url, rowFilter) {
 }
 
 export default function App() {
-  const [page, setPage] = useState('exam')
+  const location = useLocation()
+  const navigate = useNavigate()
+  const page = location.pathname === '/review' ? 'review' : 'exam'
+  const setPage = (p) => navigate('/' + p)
 
   // 모의고사
   const { data: all, loading: examLoading, error: examError } = useCsv(
@@ -77,11 +81,10 @@ export default function App() {
   const { data: reviews, loading: reviewLoading, error: reviewError } = useCsv(
     reviewCsvUrl, row => !!row.title
   )
-  const [reviewSubject, setReviewSubject] = useState('math')
+  const [reviewSearch, setReviewSearch] = useState('')
   const [selectedReview, setSelectedReview] = useState(null)
 
   const TIER_ORDER = { S: 0, A: 1, B: 2, C: 3, D: 4 }
-  const SUBJECT_ALIAS = { math: ['math', '수학'], korean: ['korean', '국어'] }
 
   const subjectData = all.filter(e => e.subject === subject)
 
@@ -95,7 +98,7 @@ export default function App() {
     })
 
   const filteredReviews = [...reviews]
-    .filter(r => SUBJECT_ALIAS[reviewSubject]?.includes(r.subject))
+    .filter(r => r.title.toLowerCase().includes(reviewSearch.toLowerCase()))
     .sort((a, b) => {
       const ta = TIER_ORDER[a.tier?.toUpperCase()] ?? 99
       const tb = TIER_ORDER[b.tier?.toUpperCase()] ?? 99
@@ -119,9 +122,6 @@ export default function App() {
             {page === 'exam' && (
               <SubjectSwitch subject={subject} onSubject={handleSubject} />
             )}
-            {page === 'review' && (
-              <SubjectSwitch subject={reviewSubject} onSubject={setReviewSubject} />
-            )}
           </div>
         </div>
         {page === 'exam' && <div className="divider" />}
@@ -132,7 +132,26 @@ export default function App() {
           </>
         )}
         {page === 'review' && (
-          <ReviewList reviews={filteredReviews} loading={reviewLoading} error={reviewError} onRowClick={setSelectedReview} />
+          <>
+            <div className="filter-area" style={{ marginBottom: '20px' }}>
+              <div className="search-row" style={{ width: '100%', maxWidth: '320px', height: '34px' }}>
+                <i className="fa-solid fa-magnifying-glass search-icon" />
+                <input
+                  className="search-input"
+                  type="text"
+                  placeholder="컨텐츠 검색..."
+                  value={reviewSearch}
+                  onChange={e => setReviewSearch(e.target.value)}
+                />
+                {reviewSearch && (
+                  <button className="search-clear" onClick={() => setReviewSearch('')}>
+                    <i className="fa-solid fa-xmark" />
+                  </button>
+                )}
+              </div>
+            </div>
+            <ReviewList reviews={filteredReviews} loading={reviewLoading} error={reviewError} onRowClick={setSelectedReview} />
+          </>
         )}
         <div className="page-footer">{fmtToday()}</div>
         {selected && <DetailModal exam={selected} onClose={() => setSelected(null)} />}

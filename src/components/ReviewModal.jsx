@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
-import { TierBadge } from './ReviewCard'
+import { TierBadge, SubjectTag } from './ReviewCard'
 
 export default function ReviewModal({ review, onClose }) {
-  const { title, category, tier, review: body } = review
+  const { title, category, subject, tier, review: body } = review
 
   useEffect(() => {
     const handler = e => { if (e.key === 'Escape') onClose() }
@@ -23,9 +23,11 @@ export default function ReviewModal({ review, onClose }) {
         <div className="review-modal-body">
           <div className="review-modal-title-row">
             <h2 className="review-modal-title">{title}</h2>
-            <TierBadge tier={tier} />
           </div>
-          {category && <p className="review-modal-category">{category}</p>}
+          <div className="review-modal-tags">
+            {category && <span className="tag tag-home">{category}</span>}
+            <SubjectTag subject={subject} />
+          </div>
           {body && (
             <>
               <div className="review-modal-divider" />

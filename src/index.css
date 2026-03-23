@@ -366,10 +366,11 @@ html, body {
   flex: 1;
   min-width: 0;
 }
-.review-modal-category {
-  font-size: 0.8125rem;
-  color: var(--text-placeholder);
-  margin-bottom: 0;
+.review-modal-tags {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 4px;
 }
 .review-modal-divider {
   height: 1px;
@@ -492,9 +493,11 @@ html, body {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.review-card-category {
-  font-size: 0.75rem;
-  color: var(--text-placeholder);
+.review-card-tags {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
 }
 
 

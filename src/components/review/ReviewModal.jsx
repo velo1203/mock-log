@@ -24,6 +24,7 @@ export default function ReviewModal({ review, onClose }) {
           <div className="review-modal-tags">
             {category && <span className="tag tag-home">{category}</span>}
             <SubjectTag subject={subject} />
+            <TierBadge tier={tier} />
           </div>
           {body && (
             <>

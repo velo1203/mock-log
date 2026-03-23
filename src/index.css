@@ -442,9 +442,9 @@ html, body {
   .filter-btn { height: 36px; }
 
   /* 카드 태그 — 아이콘 숨기고 크기 축소해서 줄바꿈 방지 */
-  .tag { font-size: 0.75rem; padding: 2px 5px; }
+  .tag { font-size: 0.6875rem; padding: 1px 5px; }
   .tag i { display: none; }
-  .exam-card-date { font-size: 0.75rem; }
+  .exam-card-date { font-size: 0.6875rem; }
 
   .modal-backdrop { align-items: flex-end; padding: 0; }
   .modal {

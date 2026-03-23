@@ -33,56 +33,53 @@ html, body {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: var(--bg-primary);
+  background: var(--bg-secondary);
   border-bottom: 1px solid var(--border);
 }
 .site-header-inner {
   max-width: 960px;
   margin: 0 auto;
   padding: 0 96px;
-  height: 52px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 .site-logo {
-  font-size: 0.9375rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: -0.01em;
 }
 .site-nav {
   display: flex;
-  gap: 2px;
+  gap: 0;
 }
 .site-nav-btn {
-  height: 32px;
+  height: 48px;
   padding: 0 14px;
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--text-secondary);
   background: none;
   border: none;
-  border-radius: 6px;
+  border-bottom: 2px solid transparent;
   cursor: pointer;
   font-family: inherit;
-  transition: background 80ms ease, color 80ms ease;
+  transition: color 80ms ease, border-color 80ms ease;
 }
-.site-nav-btn:hover {
-  background: var(--bg-hover);
-  color: var(--text-primary);
-}
+.site-nav-btn:hover { color: var(--text-primary); }
 .site-nav-btn.on {
-  background: var(--bg-hover);
   color: var(--text-primary);
   font-weight: 600;
+  border-bottom-color: var(--text-primary);
 }
 
 /* ── Page ── */
 .page {
   max-width: 960px;
   margin: 0 auto;
-  padding: 96px 96px 96px;
+  padding: 48px 96px 80px;
 }
 
 /* ── Header row ── */
@@ -673,15 +670,16 @@ html, body {
 
 /* ── Responsive ── */
 
-/* Tablet (641px – 960px): 과도한 96px 패딩 완화 */
+/* Tablet (641px – 960px) */
 @media (max-width: 960px) {
   .site-header-inner { padding: 0 48px; }
-  .page { padding: 64px 48px 80px; }
+  .page { padding: 36px 48px 80px; }
 }
 
 /* Mobile (≤ 640px) */
 @media (max-width: 640px) {
-  .page { padding: 32px 20px 48px; }
+  .site-header-inner { padding: 0 20px; }
+  .page { padding: 28px 20px 48px; }
   .page-title { font-size: 1.75rem; }
 
   .page-header-row {
@@ -689,7 +687,6 @@ html, body {
     align-items: flex-start;
     gap: 12px;
   }
-  .site-header-inner { padding: 0 20px; }
   .header-controls { margin-top: 0; align-items: flex-start; }
   .subject-switch { margin-top: 0; }
   /* 터치 타겟 확대 */

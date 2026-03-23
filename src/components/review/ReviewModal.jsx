@@ -28,7 +28,7 @@ export default function ReviewModal({ review, onClose }) {
           {body && (
             <>
               <div className="review-modal-divider" />
-              <p className="review-modal-text">{body}</p>
+              <p className="review-modal-text" style={{ whiteSpace: 'pre-wrap' }}>{body}</p>
             </>
           )}
         </div>

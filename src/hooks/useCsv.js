@@ -1,17 +1,38 @@
 import { useState, useEffect } from 'react'
 
 function parseCsv(text, rowFilter) {
-  const lines = text.trim().split('\n')
-  const headers = lines[0].split(',').map(h => h.trim())
-  return lines.slice(1).map(line => {
-    const values = []
-    let cur = '', inQuote = false
-    for (const ch of line) {
-      if (ch === '"') { inQuote = !inQuote }
-      else if (ch === ',' && !inQuote) { values.push(cur.trim()); cur = '' }
-      else { cur += ch }
+  const rows = []
+  let cur = '', inQuote = false
+  const raw = text.trim()
+  for (let i = 0; i < raw.length; i++) {
+    const ch = raw[i]
+    if (ch === '"') {
+      if (inQuote && raw[i + 1] === '"') { cur += '"'; i++ }
+      else { inQuote = !inQuote }
+    } else if (ch === '\n' && !inQuote) {
+      rows.push(cur); cur = ''
+    } else {
+      cur += ch
     }
-    values.push(cur.trim())
+  }
+  rows.push(cur)
+
+  const headers = rows[0].split(',').map(h => h.trim())
+  return rows.slice(1).map(line => {
+    const values = []
+    let cell = '', q = false
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i]
+      if (ch === '"') {
+        if (q && line[i + 1] === '"') { cell += '"'; i++ }
+        else { q = !q }
+      } else if (ch === ',' && !q) {
+        values.push(cell.trim()); cell = ''
+      } else {
+        cell += ch
+      }
+    }
+    values.push(cell.trim())
     const obj = {}
     headers.forEach((h, i) => { obj[h] = values[i] ?? '' })
     return obj

@@ -17,7 +17,7 @@ export function SubjectTag({ subject }) {
 }
 
 export default function ReviewCard({ review, onClick }) {
-  const { title, category, subject, review: body } = review
+  const { title, category, subject, tier, review: body } = review
 
   return (
     <div className="review-card" onClick={onClick}>
@@ -25,6 +25,7 @@ export default function ReviewCard({ review, onClick }) {
       <div className="review-card-tags">
         {category && <span className="tag tag-home">{category}</span>}
         <SubjectTag subject={subject} />
+        <TierBadge tier={tier} />
       </div>
       {body && <p className="review-card-body">{body}</p>}
     </div>

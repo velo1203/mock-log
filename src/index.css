@@ -306,20 +306,24 @@ html, body {
 .tag i { font-size: 9px; }
 
 .tag-full {
-  background: rgba(105, 64, 165, 0.1);
+  background: rgba(105, 64, 165, 0.08);
   color: var(--purple);
+  border: 1px solid rgba(105, 64, 165, 0.25);
 }
 .tag-half {
-  background: rgba(223, 171, 1, 0.12);
+  background: rgba(223, 171, 1, 0.1);
   color: #a07c00;
+  border: 1px solid rgba(223, 171, 1, 0.35);
 }
 .tag-live {
-  background: rgba(15, 123, 108, 0.1);
+  background: rgba(15, 123, 108, 0.08);
   color: var(--green);
+  border: 1px solid rgba(15, 123, 108, 0.25);
 }
 .tag-home {
-  background: rgba(155, 154, 151, 0.15);
+  background: rgba(155, 154, 151, 0.1);
   color: var(--text-secondary);
+  border: 1px solid rgba(155, 154, 151, 0.35);
 }
 
 /* ── Score ── */

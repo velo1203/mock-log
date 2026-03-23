@@ -9,12 +9,12 @@ export default function ReviewCard({ review, onClick }) {
   return (
     <div className="review-card" onClick={onClick}>
       <div className="review-card-title">{title}</div>
-      <div className="review-card-bottom">
-        {category && <span className="tag tag-home">{category}</span>}
-        {body && (
-          <span className="review-preview">{body.slice(0, 40)}{body.length > 40 ? '…' : ''}</span>
-        )}
-      </div>
+      {body && <p className="review-card-body">{body}</p>}
+      {category && (
+        <div className="review-card-footer">
+          <span className="tag tag-home">{category}</span>
+        </div>
+      )}
     </div>
   )
 }

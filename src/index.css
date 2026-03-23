@@ -359,6 +359,16 @@ html, body {
   font-size: 0.75rem;
   color: var(--text-placeholder);
 }
+.review-tier-label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.tier-text-S { color: #a07c00; }
+.tier-text-A { color: var(--green); }
+.tier-text-B { color: var(--accent); }
+.tier-text-C { color: var(--text-secondary); }
+.tier-text-D { color: var(--text-placeholder); }
 .review-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -370,6 +380,9 @@ html, body {
   border-radius: 8px;
   padding: 14px 16px;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   transition: background 80ms ease, border-color 80ms ease;
 }
 .review-card:hover {
@@ -380,25 +393,21 @@ html, body {
   font-size: 0.9375rem;
   font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 8px;
-  min-width: 0;
+  line-height: 1.4;
 }
-.review-card-bottom {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-/* ── Review ── */
-.review-preview {
+.review-card-body {
   font-size: 0.8125rem;
   color: var(--text-secondary);
-  white-space: nowrap;
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 120px;
 }
+.review-card-footer {
+  margin-top: 2px;
+}
+
 
 /* ── Footer ── */
 .page-footer {

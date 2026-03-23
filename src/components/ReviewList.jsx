@@ -51,7 +51,7 @@ export default function ReviewList({ reviews, loading, error, onRowClick }) {
         return (
           <div key={tier} className="review-section">
             <div className="review-section-header">
-              <span className={`tier-badge tier-${tier}`}>{tier}</span>
+              <span className={`review-tier-label tier-text-${tier}`}>{tier} 티어</span>
               <span className="review-section-line" />
               <span className="review-section-count">{items.length}개</span>
             </div>

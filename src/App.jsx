@@ -39,6 +39,9 @@ function fmtToday() {
     String(d.getDate()).padStart(2, '0')
 }
 
+const CACHE_KEY = 'mock_log_csv'
+const CACHE_TTL = 60 * 60 * 1000 // 1시간
+
 export default function App() {
   const [all, setAll] = useState([])
   const [loading, setLoading] = useState(true)
@@ -46,23 +49,46 @@ export default function App() {
   const [subject, setSubject] = useState('math')
   const [filter, setFilter] = useState('all')
   const [selected, setSelected] = useState(null)
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
     const CSV_URL = import.meta.env.VITE_CSV_URL
+
+    try {
+      const cached = localStorage.getItem(CACHE_KEY)
+      if (cached) {
+        const { data, ts } = JSON.parse(cached)
+        if (Date.now() - ts < CACHE_TTL) {
+          setAll(data)
+          setLoading(false)
+          return
+        }
+      }
+    } catch {}
+
     fetch(CSV_URL)
       .then(r => { if (!r.ok) throw new Error(); return r.text() })
-      .then(csv => { setAll(parseCsv(csv)); setLoading(false) })
+      .then(csv => {
+        const data = parseCsv(csv)
+        setAll(data)
+        setLoading(false)
+        try {
+          localStorage.setItem(CACHE_KEY, JSON.stringify({ data, ts: Date.now() }))
+        } catch {}
+      })
       .catch(() => { setError(true); setLoading(false) })
   }, [])
 
   const subjectData = all.filter(e => e.subject === subject)
 
-  const sorted = [...getFiltered(all, subject, filter)].sort((a, b) => {
-    if (!a.date && !b.date) return 0
-    if (!a.date) return 1
-    if (!b.date) return -1
-    return b.date.localeCompare(a.date)
-  })
+  const sorted = [...getFiltered(all, subject, filter)]
+    .filter(e => e.name.toLowerCase().includes(search.toLowerCase()))
+    .sort((a, b) => {
+      if (!a.date && !b.date) return 0
+      if (!a.date) return 1
+      if (!b.date) return -1
+      return b.date.localeCompare(a.date)
+    })
 
   function handleSubject(s) {
     setSubject(s)
@@ -76,7 +102,7 @@ export default function App() {
         <SubjectSwitch subject={subject} onSubject={handleSubject} />
       </div>
       <div className="divider" />
-      <FilterBar filter={filter} onFilter={setFilter} />
+      <FilterBar filter={filter} onFilter={setFilter} search={search} onSearch={setSearch} />
       <ExamTable rows={sorted} loading={loading} error={error} onRowClick={setSelected} />
       <div className="page-footer">{fmtToday()}</div>
       {selected && <DetailModal exam={selected} onClose={() => setSelected(null)} />}

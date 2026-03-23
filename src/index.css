@@ -101,12 +101,68 @@ html, body {
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
+/* ── Search ── */
+.filter-area {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.search-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  padding: 0 10px;
+  height: 34px;
+  transition: border-color 120ms ease;
+}
+.search-row:focus-within {
+  border-color: var(--accent);
+}
+.search-icon {
+  font-size: 11px;
+  color: var(--text-placeholder);
+  flex-shrink: 0;
+}
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  font-family: inherit;
+}
+.search-input::placeholder {
+  color: var(--text-placeholder);
+}
+.search-clear {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-hover);
+  border: none;
+  border-radius: 4px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 10px;
+}
+.search-clear:hover {
+  background: var(--border-strong);
+}
+
 /* ── Filter bar ── */
 .filter-row {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-bottom: 12px;
   flex-wrap: wrap;
 }
 .filter-label {

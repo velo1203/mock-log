@@ -88,9 +88,12 @@ export default function App() {
   const [search, setSearch] = useState('')
   const [selected, setSelected] = useState(null)
 
-  // 후기
+  // 후기 — 같은 스프레드시트의 시트2 (gid=770427134)
+  const reviewCsvUrl = import.meta.env.VITE_CSV_URL
+    ? import.meta.env.VITE_CSV_URL + '&gid=770427134'
+    : undefined
   const { data: reviews, loading: reviewLoading, error: reviewError } = useCachedCsv(
-    import.meta.env.VITE_REVIEW_CSV_URL, 'mock_log_review', row => !!row.title
+    reviewCsvUrl, 'mock_log_review', row => !!row.title
   )
   const [reviewSubject, setReviewSubject] = useState('math')
   const [selectedReview, setSelectedReview] = useState(null)

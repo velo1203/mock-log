@@ -81,6 +81,7 @@ export default function App() {
   const [selectedReview, setSelectedReview] = useState(null)
 
   const TIER_ORDER = { S: 0, A: 1, B: 2, C: 3, D: 4 }
+  const SUBJECT_ALIAS = { math: ['math', '수학'], korean: ['korean', '국어'] }
 
   const subjectData = all.filter(e => e.subject === subject)
 
@@ -94,7 +95,7 @@ export default function App() {
     })
 
   const filteredReviews = [...reviews]
-    .filter(r => r.subject === reviewSubject)
+    .filter(r => SUBJECT_ALIAS[reviewSubject]?.includes(r.subject))
     .sort((a, b) => {
       const ta = TIER_ORDER[a.tier?.toUpperCase()] ?? 99
       const tb = TIER_ORDER[b.tier?.toUpperCase()] ?? 99

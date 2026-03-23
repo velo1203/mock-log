@@ -14,15 +14,12 @@ export default function ReviewModal({ review, onClose }) {
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal" onClick={e => e.stopPropagation()}>
 
-        <div className="review-modal-header">
-          <button className="modal-close" onClick={onClose}>
-            <i className="fa-solid fa-xmark" />
-          </button>
-        </div>
-
         <div className="review-modal-body">
           <div className="review-modal-title-row">
             <h2 className="review-modal-title">{title}</h2>
+            <button className="modal-close" onClick={onClose}>
+              <i className="fa-solid fa-xmark" />
+            </button>
           </div>
           <div className="review-modal-tags">
             {category && <span className="tag tag-home">{category}</span>}

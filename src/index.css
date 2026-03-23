@@ -346,22 +346,17 @@ html, body {
 }
 
 /* ── Review modal ── */
-.review-modal-header {
-  display: flex;
-  justify-content: flex-end;
-  padding: 14px 14px 0;
-}
 .review-modal-body {
-  padding: 4px 24px 28px;
+  padding: 24px 24px 28px;
 }
 .review-modal-title-row {
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  margin-bottom: 4px;
+  margin-bottom: 10px;
 }
 .review-modal-title {
-  font-size: 1.375rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1.3;
@@ -373,7 +368,6 @@ html, body {
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-bottom: 4px;
 }
 .review-modal-divider {
   height: 1px;
@@ -381,9 +375,9 @@ html, body {
   margin: 16px 0;
 }
 .review-modal-text {
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   color: var(--text-secondary);
-  line-height: 1.75;
+  line-height: 1.8;
   white-space: pre-wrap;
 }
 

@@ -50,7 +50,8 @@ function useCsv(url, rowFilter) {
 
   useEffect(() => {
     if (!url) { setLoading(false); return }
-    fetch(url)
+    const bustUrl = `${url}&t=${Date.now()}`
+    fetch(bustUrl)
       .then(r => { if (!r.ok) throw new Error(); return r.text() })
       .then(csv => { setData(parseCsv(csv, rowFilter)); setLoading(false) })
       .catch(() => { setError(true); setLoading(false) })

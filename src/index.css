@@ -70,6 +70,45 @@ html, body {
   margin: 0 0 20px;
 }
 
+/* ── Header controls ── */
+.header-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+/* ── Page nav ── */
+.page-nav {
+  display: flex;
+  gap: 2px;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 3px;
+  width: fit-content;
+}
+.page-nav-btn {
+  height: 30px;
+  padding: 0 16px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 80ms ease, color 80ms ease;
+}
+.page-nav-btn:hover { color: var(--text-primary); }
+.page-nav-btn.on {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
 /* ── Subject switch ── */
 .subject-switch {
   display: flex;
@@ -254,6 +293,25 @@ html, body {
   color: var(--text-placeholder);
   display: block;
   margin-bottom: 12px;
+}
+
+/* ── Review ── */
+.review-rating {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--yellow);
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.review-rating i { font-size: 10px; }
+.review-preview {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
 }
 
 /* ── Footer ── */
@@ -484,6 +542,7 @@ html, body {
     align-items: flex-start;
     gap: 12px;
   }
+  .header-controls { margin-top: 0; align-items: flex-start; }
   .subject-switch { margin-top: 0; }
   /* 터치 타겟 확대 */
   .subject-btn { height: 36px; }

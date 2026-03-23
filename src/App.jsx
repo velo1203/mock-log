@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
 import PageHeader from './components/PageHeader'
+import PageNav from './components/PageNav'
 import SubjectSwitch from './components/SubjectSwitch'
 import FilterBar from './components/FilterBar'
 import ExamTable from './components/ExamTable'
 import DetailModal from './components/DetailModal'
+import ReviewList from './components/ReviewList'
+import ReviewModal from './components/ReviewModal'
 
-function parseCsv(text) {
+function parseCsv(text, rowFilter) {
   const lines = text.trim().split('\n')
   const headers = lines[0].split(',').map(h => h.trim())
   return lines.slice(1).map(line => {
@@ -20,7 +23,7 @@ function parseCsv(text) {
     const obj = {}
     headers.forEach((h, i) => { obj[h] = values[i] ?? '' })
     return obj
-  }).filter(row => row.name)
+  }).filter(rowFilter)
 }
 
 function getFiltered(all, subject, filter) {
@@ -39,45 +42,57 @@ function fmtToday() {
     String(d.getDate()).padStart(2, '0')
 }
 
-const CACHE_KEY = 'mock_log_csv'
-const CACHE_TTL = 60 * 60 * 1000 // 1시간
-
-export default function App() {
-  const [all, setAll] = useState([])
+function useCachedCsv(url, cacheKey, rowFilter) {
+  const CACHE_TTL = 60 * 60 * 1000
+  const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
-  const [subject, setSubject] = useState('math')
-  const [filter, setFilter] = useState('all')
-  const [selected, setSelected] = useState(null)
-  const [search, setSearch] = useState('')
 
   useEffect(() => {
-    const CSV_URL = import.meta.env.VITE_CSV_URL
+    if (!url) { setLoading(false); return }
 
     try {
-      const cached = localStorage.getItem(CACHE_KEY)
+      const cached = localStorage.getItem(cacheKey)
       if (cached) {
-        const { data, ts } = JSON.parse(cached)
+        const { data: d, ts } = JSON.parse(cached)
         if (Date.now() - ts < CACHE_TTL) {
-          setAll(data)
-          setLoading(false)
-          return
+          setData(d); setLoading(false); return
         }
       }
     } catch {}
 
-    fetch(CSV_URL)
+    fetch(url)
       .then(r => { if (!r.ok) throw new Error(); return r.text() })
       .then(csv => {
-        const data = parseCsv(csv)
-        setAll(data)
-        setLoading(false)
+        const parsed = parseCsv(csv, rowFilter)
+        setData(parsed); setLoading(false)
         try {
-          localStorage.setItem(CACHE_KEY, JSON.stringify({ data, ts: Date.now() }))
+          localStorage.setItem(cacheKey, JSON.stringify({ data: parsed, ts: Date.now() }))
         } catch {}
       })
       .catch(() => { setError(true); setLoading(false) })
   }, [])
+
+  return { data, loading, error }
+}
+
+export default function App() {
+  const [page, setPage] = useState('exam')
+
+  // 모의고사
+  const { data: all, loading: examLoading, error: examError } = useCachedCsv(
+    import.meta.env.VITE_CSV_URL, 'mock_log_csv', row => !!row.name
+  )
+  const [subject, setSubject] = useState('math')
+  const [filter, setFilter] = useState('all')
+  const [search, setSearch] = useState('')
+  const [selected, setSelected] = useState(null)
+
+  // 후기
+  const { data: reviews, loading: reviewLoading, error: reviewError } = useCachedCsv(
+    import.meta.env.VITE_REVIEW_CSV_URL, 'mock_log_review', row => !!row.title
+  )
+  const [selectedReview, setSelectedReview] = useState(null)
 
   const subjectData = all.filter(e => e.subject === subject)
 
@@ -90,22 +105,44 @@ export default function App() {
       return b.date.localeCompare(a.date)
     })
 
+  const sortedReviews = [...reviews].sort((a, b) => {
+    if (!a.date && !b.date) return 0
+    if (!a.date) return 1
+    if (!b.date) return -1
+    return b.date.localeCompare(a.date)
+  })
+
   function handleSubject(s) {
     setSubject(s)
     setFilter('all')
   }
 
+  const headerCount = page === 'exam' ? subjectData.length : reviews.length
+
   return (
     <div className="page">
       <div className="page-header-row">
-        <PageHeader all={subjectData} />
-        <SubjectSwitch subject={subject} onSubject={handleSubject} />
+        <PageHeader page={page} count={headerCount} />
+        <div className="header-controls">
+          <PageNav page={page} onPage={setPage} />
+          {page === 'exam' && (
+            <SubjectSwitch subject={subject} onSubject={handleSubject} />
+          )}
+        </div>
       </div>
       <div className="divider" />
-      <FilterBar filter={filter} onFilter={setFilter} search={search} onSearch={setSearch} />
-      <ExamTable rows={sorted} loading={loading} error={error} onRowClick={setSelected} />
+      {page === 'exam' && (
+        <>
+          <FilterBar filter={filter} onFilter={setFilter} search={search} onSearch={setSearch} />
+          <ExamTable rows={sorted} loading={examLoading} error={examError} onRowClick={setSelected} />
+        </>
+      )}
+      {page === 'review' && (
+        <ReviewList reviews={sortedReviews} loading={reviewLoading} error={reviewError} onRowClick={setSelectedReview} />
+      )}
       <div className="page-footer">{fmtToday()}</div>
       {selected && <DetailModal exam={selected} onClose={() => setSelected(null)} />}
+      {selectedReview && <ReviewModal review={selectedReview} onClose={() => setSelectedReview(null)} />}
     </div>
   )
 }

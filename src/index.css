@@ -438,13 +438,11 @@ html, body {
     -webkit-overflow-scrolling: touch;
   }
   .filter-row::-webkit-scrollbar { display: none; }
-  /* 터치 타겟 확대 + 폰트 축소 + 아이콘 숨김 */
+  /* 터치 타겟 확대 + 폰트 축소 */
   .filter-btn { height: 36px; font-size: 0.75rem; padding: 0 8px; }
-  .filter-btn i { display: none; }
 
-  /* 카드 태그 — 아이콘 숨기고 크기 축소해서 줄바꿈 방지 */
+  /* 카드 태그 크기 축소 */
   .tag { font-size: 0.6875rem; padding: 1px 5px; }
-  .tag i { display: none; }
   .exam-card-date { font-size: 0.6875rem; }
 
   .modal-backdrop { align-items: flex-end; padding: 0; }

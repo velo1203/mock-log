@@ -5,8 +5,32 @@ const TIERS = ['S', 'A', 'B', 'C', 'D']
 function SkeletonCard() {
   return (
     <div className="review-card skeleton-card">
-      <div className="skeleton" style={{ width: '50%', height: '15px', marginBottom: '10px' }} />
-      <div className="skeleton" style={{ width: '80%', height: '12px' }} />
+      {/* 제목 */}
+      <div className="skeleton" style={{ width: '60%', height: '16px', marginBottom: '8px' }} />
+      {/* 태그 2개 */}
+      <div style={{ display: 'flex', gap: '6px', marginBottom: '10px' }}>
+        <span className="skeleton" style={{ width: '44px', height: '20px', borderRadius: '4px' }} />
+        <span className="skeleton" style={{ width: '36px', height: '20px', borderRadius: '4px' }} />
+      </div>
+      {/* 본문 2줄 */}
+      <div className="skeleton" style={{ width: '100%', height: '12px', marginBottom: '5px' }} />
+      <div className="skeleton" style={{ width: '75%', height: '12px' }} />
+    </div>
+  )
+}
+
+function SkeletonSection() {
+  return (
+    <div className="review-section">
+      {/* 섹션 헤더: 티어 라벨 + 선 */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '2px' }}>
+        <div className="skeleton" style={{ width: '48px', height: '13px', flexShrink: 0 }} />
+        <div className="skeleton" style={{ flex: 1, height: '1px' }} />
+        <div className="skeleton" style={{ width: '24px', height: '13px', flexShrink: 0 }} />
+      </div>
+      <div className="review-grid">
+        {[0, 1].map(j => <SkeletonCard key={j} />)}
+      </div>
     </div>
   )
 }
@@ -14,15 +38,8 @@ function SkeletonCard() {
 export default function ReviewList({ reviews, loading, error, onRowClick }) {
   if (loading) {
     return (
-      <div>
-        {[0, 1].map(i => (
-          <div key={i} className="review-section">
-            <div className="skeleton" style={{ width: '60px', height: '13px', marginBottom: '12px' }} />
-            <div className="review-grid">
-              {[0, 1].map(j => <SkeletonCard key={j} />)}
-            </div>
-          </div>
-        ))}
+      <div className="review-sections">
+        {[0, 1].map(i => <SkeletonSection key={i} />)}
       </div>
     )
   }

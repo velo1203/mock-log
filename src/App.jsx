@@ -1,31 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useCsv } from './hooks/useCsv'
 import Header from './components/Header'
 import PageHeader from './components/PageHeader'
-import SubjectSwitch from './components/SubjectSwitch'
-import FilterBar from './components/FilterBar'
-import ExamTable from './components/ExamTable'
-import DetailModal from './components/DetailModal'
-import ReviewList from './components/ReviewList'
-import ReviewModal from './components/ReviewModal'
-
-function parseCsv(text, rowFilter) {
-  const lines = text.trim().split('\n')
-  const headers = lines[0].split(',').map(h => h.trim())
-  return lines.slice(1).map(line => {
-    const values = []
-    let cur = '', inQuote = false
-    for (const ch of line) {
-      if (ch === '"') { inQuote = !inQuote }
-      else if (ch === ',' && !inQuote) { values.push(cur.trim()); cur = '' }
-      else { cur += ch }
-    }
-    values.push(cur.trim())
-    const obj = {}
-    headers.forEach((h, i) => { obj[h] = values[i] ?? '' })
-    return obj
-  }).filter(rowFilter)
-}
+import SubjectSwitch from './components/exam/SubjectSwitch'
+import FilterBar from './components/exam/FilterBar'
+import ExamTable from './components/exam/ExamTable'
+import DetailModal from './components/exam/DetailModal'
+import ReviewList from './components/review/ReviewList'
+import ReviewModal from './components/review/ReviewModal'
 
 function getFiltered(all, subject, filter) {
   let data = all.filter(e => e.subject === subject)
@@ -41,23 +24,6 @@ function fmtToday() {
   return '업데이트: ' + d.getFullYear() + '.' +
     String(d.getMonth() + 1).padStart(2, '0') + '.' +
     String(d.getDate()).padStart(2, '0')
-}
-
-function useCsv(url, rowFilter) {
-  const [data, setData] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(false)
-
-  useEffect(() => {
-    if (!url) { setLoading(false); return }
-    const bustUrl = `${url}&t=${Date.now()}`
-    fetch(bustUrl)
-      .then(r => { if (!r.ok) throw new Error(); return r.text() })
-      .then(csv => { setData(parseCsv(csv, rowFilter)); setLoading(false) })
-      .catch(() => { setError(true); setLoading(false) })
-  }, [])
-
-  return { data, loading, error }
 }
 
 export default function App() {

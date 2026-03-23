@@ -42,34 +42,16 @@ function fmtToday() {
     String(d.getDate()).padStart(2, '0')
 }
 
-function useCachedCsv(url, cacheKey, rowFilter) {
-  const CACHE_TTL = 60 * 60 * 1000
+function useCsv(url, rowFilter) {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
   useEffect(() => {
     if (!url) { setLoading(false); return }
-
-    try {
-      const cached = localStorage.getItem(cacheKey)
-      if (cached) {
-        const { data: d, ts } = JSON.parse(cached)
-        if (Date.now() - ts < CACHE_TTL) {
-          setData(d); setLoading(false); return
-        }
-      }
-    } catch {}
-
     fetch(url)
       .then(r => { if (!r.ok) throw new Error(); return r.text() })
-      .then(csv => {
-        const parsed = parseCsv(csv, rowFilter)
-        setData(parsed); setLoading(false)
-        try {
-          localStorage.setItem(cacheKey, JSON.stringify({ data: parsed, ts: Date.now() }))
-        } catch {}
-      })
+      .then(csv => { setData(parseCsv(csv, rowFilter)); setLoading(false) })
       .catch(() => { setError(true); setLoading(false) })
   }, [])
 
@@ -80,8 +62,8 @@ export default function App() {
   const [page, setPage] = useState('exam')
 
   // 모의고사
-  const { data: all, loading: examLoading, error: examError } = useCachedCsv(
-    import.meta.env.VITE_CSV_URL, 'mock_log_csv', row => !!row.name
+  const { data: all, loading: examLoading, error: examError } = useCsv(
+    import.meta.env.VITE_CSV_URL, row => !!row.name
   )
   const [subject, setSubject] = useState('math')
   const [filter, setFilter] = useState('all')
@@ -92,8 +74,8 @@ export default function App() {
   const reviewCsvUrl = import.meta.env.VITE_CSV_URL
     ? import.meta.env.VITE_CSV_URL + '&gid=770427134'
     : undefined
-  const { data: reviews, loading: reviewLoading, error: reviewError } = useCachedCsv(
-    reviewCsvUrl, 'mock_log_review', row => !!row.title
+  const { data: reviews, loading: reviewLoading, error: reviewError } = useCsv(
+    reviewCsvUrl, row => !!row.title
   )
   const [reviewSubject, setReviewSubject] = useState('math')
   const [selectedReview, setSelectedReview] = useState(null)

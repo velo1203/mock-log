@@ -1,18 +1,12 @@
 import ReviewCard from './ReviewCard'
 
+const TIERS = ['S', 'A', 'B', 'C', 'D']
+
 function SkeletonCard() {
   return (
-    <div className="exam-card skeleton-card">
-      <div className="exam-card-top">
-        <span className="skeleton" style={{ width: '45%', height: '16px' }} />
-      </div>
-      <div className="exam-card-bottom">
-        <div className="exam-card-tags">
-          <span className="skeleton" style={{ width: '72px' }} />
-          <span className="skeleton" style={{ width: '48px' }} />
-        </div>
-        <span className="skeleton" style={{ width: '60px' }} />
-      </div>
+    <div className="review-card skeleton-card">
+      <div className="skeleton" style={{ width: '50%', height: '15px', marginBottom: '10px' }} />
+      <div className="skeleton" style={{ width: '80%', height: '12px' }} />
     </div>
   )
 }
@@ -20,8 +14,15 @@ function SkeletonCard() {
 export default function ReviewList({ reviews, loading, error, onRowClick }) {
   if (loading) {
     return (
-      <div className="card-list">
-        {Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} />)}
+      <div>
+        {[0, 1].map(i => (
+          <div key={i} className="review-section">
+            <div className="skeleton" style={{ width: '60px', height: '13px', marginBottom: '12px' }} />
+            <div className="review-grid">
+              {[0, 1].map(j => <SkeletonCard key={j} />)}
+            </div>
+          </div>
+        ))}
       </div>
     )
   }
@@ -43,10 +44,25 @@ export default function ReviewList({ reviews, loading, error, onRowClick }) {
   }
 
   return (
-    <div className="card-list">
-      {reviews.map((review, i) => (
-        <ReviewCard key={i} review={review} onClick={() => onRowClick(review)} />
-      ))}
+    <div className="review-sections">
+      {TIERS.map(tier => {
+        const items = reviews.filter(r => r.tier?.toUpperCase() === tier)
+        if (items.length === 0) return null
+        return (
+          <div key={tier} className="review-section">
+            <div className="review-section-header">
+              <span className={`tier-badge tier-${tier}`}>{tier}</span>
+              <span className="review-section-line" />
+              <span className="review-section-count">{items.length}개</span>
+            </div>
+            <div className="review-grid">
+              {items.map((review, i) => (
+                <ReviewCard key={i} review={review} onClick={() => onRowClick(review)} />
+              ))}
+            </div>
+          </div>
+        )
+      })}
     </div>
   )
 }

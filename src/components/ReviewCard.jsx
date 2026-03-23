@@ -4,22 +4,16 @@ export function TierBadge({ tier }) {
 }
 
 export default function ReviewCard({ review, onClick }) {
-  const { title, category, tier, review: body } = review
+  const { title, category, review: body } = review
 
   return (
-    <div className="exam-card" onClick={onClick}>
-      <div className="exam-card-top">
-        <span className="exam-card-name">{title}</span>
-        <i className="fa-solid fa-chevron-right exam-card-arrow" />
-      </div>
-      <div className="exam-card-bottom">
-        <div className="exam-card-tags">
-          {category && <span className="tag tag-home">{category}</span>}
-          {body && (
-            <span className="review-preview">{body.slice(0, 24)}{body.length > 24 ? '…' : ''}</span>
-          )}
-        </div>
-        <TierBadge tier={tier} />
+    <div className="review-card" onClick={onClick}>
+      <div className="review-card-title">{title}</div>
+      <div className="review-card-bottom">
+        {category && <span className="tag tag-home">{category}</span>}
+        {body && (
+          <span className="review-preview">{body.slice(0, 40)}{body.length > 40 ? '…' : ''}</span>
+        )}
       </div>
     </div>
   )

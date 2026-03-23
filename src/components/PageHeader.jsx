@@ -1,6 +1,6 @@
 const TITLES = {
   exam:   '모의고사 시행표',
-  review: '학습 후기',
+  review: '컨텐츠 후기',
 }
 const META = {
   exam:   count => `총 ${count}회 시행`,

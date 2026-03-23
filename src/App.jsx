@@ -100,8 +100,9 @@ export default function App() {
         )}
         {page === 'review' && (
           <>
-            <div className="filter-area" style={{ marginBottom: '20px' }}>
-              <div className="search-row" style={{ width: '100%', maxWidth: '320px', height: '34px' }}>
+            <div className="review-filter-bar">
+              <span className="review-count">총 {filteredReviews.length}개</span>
+              <div className="search-row">
                 <i className="fa-solid fa-magnifying-glass search-icon" />
                 <input
                   className="search-input"

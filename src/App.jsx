@@ -99,8 +99,7 @@ export default function App() {
     .sort((a, b) => {
       const ta = TIER_ORDER[a.tier?.toUpperCase()] ?? 99
       const tb = TIER_ORDER[b.tier?.toUpperCase()] ?? 99
-      if (ta !== tb) return ta - tb
-      return b.date.localeCompare(a.date)
+      return ta - tb
     })
 
   function handleSubject(s) {

@@ -1,14 +1,8 @@
 import { useEffect } from 'react'
 import { TierBadge } from './ReviewCard'
 
-function fmtDate(d) {
-  if (!d) return '—'
-  const [y, m, day] = d.split('-')
-  return `${y}년 ${m}월 ${day}일`
-}
-
 export default function ReviewModal({ review, onClose }) {
-  const { title, date, category, tier, review: body } = review
+  const { title, category, tier, review: body } = review
 
   useEffect(() => {
     const handler = e => { if (e.key === 'Escape') onClose() }
@@ -29,20 +23,16 @@ export default function ReviewModal({ review, onClose }) {
           </button>
         </div>
         <div className="modal-body">
-          <div className="detail-grid">
-            <div className="detail-row">
-              <span className="detail-label"><i className="fa-regular fa-calendar" /> 날짜</span>
-              <span className="detail-value">{fmtDate(date)}</span>
-            </div>
-            {category && (
+          {category && (
+            <div className="detail-grid">
               <div className="detail-row">
                 <span className="detail-label"><i className="fa-solid fa-tag" /> 분류</span>
                 <span className="detail-value">{category}</span>
               </div>
-            )}
-          </div>
+            </div>
+          )}
           {body && (
-            <div className="detail-memo">
+            <div className={category ? 'detail-memo' : ''}>
               <div className="detail-memo-label">
                 <i className="fa-regular fa-note-sticky" /> 후기
               </div>

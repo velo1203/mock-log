@@ -21,11 +21,11 @@ export default function ReviewModal({ review, onClose }) {
         </div>
 
         <div className="review-modal-body">
-          <h2 className="review-modal-title">{title}</h2>
-          <div className="review-modal-meta">
+          <div className="review-modal-title-row">
+            <h2 className="review-modal-title">{title}</h2>
             <TierBadge tier={tier} />
-            {category && <span className="tag tag-home">{category}</span>}
           </div>
+          {category && <p className="review-modal-category">{category}</p>}
           {body && (
             <>
               <div className="review-modal-divider" />

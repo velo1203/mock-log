@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
+import Header from './components/Header'
 import PageHeader from './components/PageHeader'
-import PageNav from './components/PageNav'
 import SubjectSwitch from './components/SubjectSwitch'
 import FilterBar from './components/FilterBar'
 import ExamTable from './components/ExamTable'
@@ -110,32 +110,34 @@ export default function App() {
   const headerCount = page === 'exam' ? subjectData.length : filteredReviews.length
 
   return (
-    <div className="page">
-      <div className="page-header-row">
-        <PageHeader page={page} count={headerCount} />
-        <div className="header-controls">
-          <PageNav page={page} onPage={setPage} />
-          {page === 'exam' && (
-            <SubjectSwitch subject={subject} onSubject={handleSubject} />
-          )}
-          {page === 'review' && (
-            <SubjectSwitch subject={reviewSubject} onSubject={setReviewSubject} />
-          )}
+    <>
+      <Header page={page} onPage={setPage} />
+      <div className="page">
+        <div className="page-header-row">
+          <PageHeader page={page} count={headerCount} />
+          <div className="header-controls">
+            {page === 'exam' && (
+              <SubjectSwitch subject={subject} onSubject={handleSubject} />
+            )}
+            {page === 'review' && (
+              <SubjectSwitch subject={reviewSubject} onSubject={setReviewSubject} />
+            )}
+          </div>
         </div>
+        <div className="divider" />
+        {page === 'exam' && (
+          <>
+            <FilterBar filter={filter} onFilter={setFilter} search={search} onSearch={setSearch} />
+            <ExamTable rows={sorted} loading={examLoading} error={examError} onRowClick={setSelected} />
+          </>
+        )}
+        {page === 'review' && (
+          <ReviewList reviews={filteredReviews} loading={reviewLoading} error={reviewError} onRowClick={setSelectedReview} />
+        )}
+        <div className="page-footer">{fmtToday()}</div>
+        {selected && <DetailModal exam={selected} onClose={() => setSelected(null)} />}
+        {selectedReview && <ReviewModal review={selectedReview} onClose={() => setSelectedReview(null)} />}
       </div>
-      <div className="divider" />
-      {page === 'exam' && (
-        <>
-          <FilterBar filter={filter} onFilter={setFilter} search={search} onSearch={setSearch} />
-          <ExamTable rows={sorted} loading={examLoading} error={examError} onRowClick={setSelected} />
-        </>
-      )}
-      {page === 'review' && (
-        <ReviewList reviews={filteredReviews} loading={reviewLoading} error={reviewError} onRowClick={setSelectedReview} />
-      )}
-      <div className="page-footer">{fmtToday()}</div>
-      {selected && <DetailModal exam={selected} onClose={() => setSelected(null)} />}
-      {selectedReview && <ReviewModal review={selectedReview} onClose={() => setSelectedReview(null)} />}
-    </div>
+    </>
   )
 }

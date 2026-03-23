@@ -28,6 +28,56 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* ── Site header ── */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border);
+}
+.site-header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 96px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.site-logo {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+.site-nav {
+  display: flex;
+  gap: 2px;
+}
+.site-nav-btn {
+  height: 32px;
+  padding: 0 14px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 80ms ease, color 80ms ease;
+}
+.site-nav-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+.site-nav-btn.on {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
 /* ── Page ── */
 .page {
   max-width: 960px;
@@ -625,6 +675,7 @@ html, body {
 
 /* Tablet (641px – 960px): 과도한 96px 패딩 완화 */
 @media (max-width: 960px) {
+  .site-header-inner { padding: 0 48px; }
   .page { padding: 64px 48px 80px; }
 }
 
@@ -638,6 +689,7 @@ html, body {
     align-items: flex-start;
     gap: 12px;
   }
+  .site-header-inner { padding: 0 20px; }
   .header-controls { margin-top: 0; align-items: flex-start; }
   .subject-switch { margin-top: 0; }
   /* 터치 타겟 확대 */

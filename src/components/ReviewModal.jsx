@@ -24,15 +24,12 @@ export default function ReviewModal({ review, onClose }) {
         </div>
         <div className="modal-body">
           {category && (
-            <div className="detail-grid">
-              <div className="detail-row">
-                <span className="detail-label"><i className="fa-solid fa-tag" /> 분류</span>
-                <span className="detail-value">{category}</span>
-              </div>
+            <div style={{ marginBottom: '12px' }}>
+              <span className="tag tag-home">{category}</span>
             </div>
           )}
           {body && (
-            <div className={category ? 'detail-memo' : ''}>
+            <div className="detail-memo">
               <div className="detail-memo-label">
                 <i className="fa-regular fa-note-sticky" /> 후기
               </div>

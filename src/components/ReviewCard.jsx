@@ -4,14 +4,13 @@ function fmtDate(d) {
   return `${y}.${m}.${day}`
 }
 
-function StarRating({ rating }) {
-  const n = parseFloat(rating)
-  if (!rating || isNaN(n)) return null
-  return <span className="review-rating">{n}<i className="fa-solid fa-star" /></span>
+export function TierBadge({ tier }) {
+  if (!tier) return null
+  return <span className={`tier-badge tier-${tier.toUpperCase()}`}>{tier.toUpperCase()}</span>
 }
 
 export default function ReviewCard({ review, onClick }) {
-  const { title, date, category, rating, review: body } = review
+  const { title, date, category, tier, review: body } = review
 
   return (
     <div className="exam-card" onClick={onClick}>
@@ -22,16 +21,12 @@ export default function ReviewCard({ review, onClick }) {
       <div className="exam-card-bottom">
         <div className="exam-card-tags">
           <span className="exam-card-date">{fmtDate(date)}</span>
-          {category && (
-            <span className="tag tag-home">{category}</span>
-          )}
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <StarRating rating={rating} />
+          {category && <span className="tag tag-home">{category}</span>}
           {body && (
-            <span className="review-preview">{body.slice(0, 20)}{body.length > 20 ? '…' : ''}</span>
+            <span className="review-preview">{body.slice(0, 24)}{body.length > 24 ? '…' : ''}</span>
           )}
         </div>
+        <TierBadge tier={tier} />
       </div>
     </div>
   )

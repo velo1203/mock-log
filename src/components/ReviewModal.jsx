@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { TierBadge } from './ReviewCard'
 
 function fmtDate(d) {
   if (!d) return '—'
@@ -7,7 +8,7 @@ function fmtDate(d) {
 }
 
 export default function ReviewModal({ review, onClose }) {
-  const { title, date, category, rating, review: body } = review
+  const { title, date, category, tier, rating, review: body } = review
 
   useEffect(() => {
     const handler = e => { if (e.key === 'Escape') onClose() }
@@ -15,13 +16,14 @@ export default function ReviewModal({ review, onClose }) {
     return () => window.removeEventListener('keydown', handler)
   }, [onClose])
 
-  const n = rating !== '' && rating != null ? parseFloat(rating) : null
-
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal" onClick={e => e.stopPropagation()}>
         <div className="modal-header">
-          <h2 className="modal-title">{title}</h2>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0 }}>
+            <h2 className="modal-title">{title}</h2>
+            <TierBadge tier={tier} />
+          </div>
           <button className="modal-close" onClick={onClose}>
             <i className="fa-solid fa-xmark" />
           </button>
@@ -38,10 +40,10 @@ export default function ReviewModal({ review, onClose }) {
                 <span className="detail-value">{category}</span>
               </div>
             )}
-            {n !== null && !isNaN(n) && (
+            {rating && (
               <div className="detail-row">
                 <span className="detail-label"><i className="fa-solid fa-star" /> 평점</span>
-                <span className="detail-value review-rating">{n}<i className="fa-solid fa-star" /></span>
+                <span className="detail-value review-rating">{rating}<i className="fa-solid fa-star" /></span>
               </div>
             )}
           </div>

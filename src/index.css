@@ -295,6 +295,45 @@ html, body {
   margin-bottom: 12px;
 }
 
+/* ── Tier badge ── */
+.tier-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  letter-spacing: 0;
+}
+.tier-S {
+  background: rgba(223, 171, 1, 0.15);
+  color: #a07c00;
+  border: 1px solid rgba(223, 171, 1, 0.35);
+}
+.tier-A {
+  background: rgba(15, 123, 108, 0.1);
+  color: var(--green);
+  border: 1px solid rgba(15, 123, 108, 0.25);
+}
+.tier-B {
+  background: rgba(35, 131, 226, 0.1);
+  color: var(--accent);
+  border: 1px solid rgba(35, 131, 226, 0.25);
+}
+.tier-C {
+  background: var(--bg-hover);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-strong);
+}
+.tier-D {
+  background: var(--bg-secondary);
+  color: var(--text-placeholder);
+  border: 1px solid var(--border);
+}
+
 /* ── Review ── */
 .review-rating {
   font-size: 0.875rem;

@@ -92,7 +92,10 @@ export default function App() {
   const { data: reviews, loading: reviewLoading, error: reviewError } = useCachedCsv(
     import.meta.env.VITE_REVIEW_CSV_URL, 'mock_log_review', row => !!row.title
   )
+  const [reviewSubject, setReviewSubject] = useState('math')
   const [selectedReview, setSelectedReview] = useState(null)
+
+  const TIER_ORDER = { S: 0, A: 1, B: 2, C: 3, D: 4 }
 
   const subjectData = all.filter(e => e.subject === subject)
 
@@ -105,19 +108,21 @@ export default function App() {
       return b.date.localeCompare(a.date)
     })
 
-  const sortedReviews = [...reviews].sort((a, b) => {
-    if (!a.date && !b.date) return 0
-    if (!a.date) return 1
-    if (!b.date) return -1
-    return b.date.localeCompare(a.date)
-  })
+  const filteredReviews = [...reviews]
+    .filter(r => r.subject === reviewSubject)
+    .sort((a, b) => {
+      const ta = TIER_ORDER[a.tier?.toUpperCase()] ?? 99
+      const tb = TIER_ORDER[b.tier?.toUpperCase()] ?? 99
+      if (ta !== tb) return ta - tb
+      return b.date.localeCompare(a.date)
+    })
 
   function handleSubject(s) {
     setSubject(s)
     setFilter('all')
   }
 
-  const headerCount = page === 'exam' ? subjectData.length : reviews.length
+  const headerCount = page === 'exam' ? subjectData.length : filteredReviews.length
 
   return (
     <div className="page">
@@ -127,6 +132,9 @@ export default function App() {
           <PageNav page={page} onPage={setPage} />
           {page === 'exam' && (
             <SubjectSwitch subject={subject} onSubject={handleSubject} />
+          )}
+          {page === 'review' && (
+            <SubjectSwitch subject={reviewSubject} onSubject={setReviewSubject} />
           )}
         </div>
       </div>
@@ -138,7 +146,7 @@ export default function App() {
         </>
       )}
       {page === 'review' && (
-        <ReviewList reviews={sortedReviews} loading={reviewLoading} error={reviewError} onRowClick={setSelectedReview} />
+        <ReviewList reviews={filteredReviews} loading={reviewLoading} error={reviewError} onRowClick={setSelectedReview} />
       )}
       <div className="page-footer">{fmtToday()}</div>
       {selected && <DetailModal exam={selected} onClose={() => setSelected(null)} />}

@@ -189,12 +189,6 @@ html, body {
 .no-score { color: var(--text-placeholder); font-size: 0.8125rem; }
 
 /* ── Empty / loading state ── */
-.state-row td {
-  text-align: center;
-  padding: 64px 24px;
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-}
 .state-icon {
   font-size: 24px;
   color: var(--text-placeholder);
@@ -380,6 +374,8 @@ html, body {
   font-size: 0.9375rem;
   font-weight: 600;
   color: var(--text-primary);
+  flex: 1;
+  min-width: 0;
 }
 .exam-card-arrow {
   font-size: 10px;
@@ -412,8 +408,15 @@ html, body {
 }
 
 /* ── Responsive ── */
+
+/* Tablet (641px – 960px): 과도한 96px 패딩 완화 */
+@media (max-width: 960px) {
+  .page { padding: 64px 48px 80px; }
+}
+
+/* Mobile (≤ 640px) */
 @media (max-width: 640px) {
-  .page { padding: 40px 20px 60px; }
+  .page { padding: 32px 20px 48px; }
   .page-title { font-size: 1.75rem; }
 
   .page-header-row {
@@ -422,6 +425,8 @@ html, body {
     gap: 12px;
   }
   .subject-switch { margin-top: 0; }
+  /* 터치 타겟 확대 */
+  .subject-btn { height: 36px; }
 
   .filter-label { display: none; }
   .filter-row {
@@ -433,6 +438,8 @@ html, body {
     -webkit-overflow-scrolling: touch;
   }
   .filter-row::-webkit-scrollbar { display: none; }
+  /* 터치 타겟 확대 */
+  .filter-btn { height: 36px; }
 
   .modal-backdrop { align-items: flex-end; padding: 0; }
   .modal {
@@ -440,6 +447,11 @@ html, body {
     max-width: 100%;
     animation: slide-up-mobile 200ms ease;
   }
+  /* iOS 홈 인디케이터(세이프 에리어) 대응 */
+  .modal-body {
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  }
+
   @keyframes slide-up-mobile {
     from { transform: translateY(100%); }
     to   { transform: translateY(0); }

@@ -550,6 +550,8 @@ html, body {
   border-radius: 8px;
   width: 100%;
   max-width: 480px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   animation: slide-up 140ms ease;
 }
@@ -782,6 +784,7 @@ html, body {
   .modal {
     border-radius: 12px 12px 0 0;
     max-width: 100%;
+    max-height: 90vh;
     animation: slide-up-mobile 200ms ease;
   }
   /* iOS 홈 인디케이터(세이프 에리어) 대응 */

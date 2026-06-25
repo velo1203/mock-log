@@ -4,8 +4,13 @@ function fmtDate(d) {
   return `${y}.${m}.${day}`
 }
 
+function getStudentId(exam) {
+  return exam.studentId || exam.studentNumber || exam['학번'] || ''
+}
+
 export default function ExamCard({ exam, onClick }) {
   const { name, date, type, place, score } = exam
+  const studentId = getStudentId(exam)
 
   const n = score !== '' && score != null ? score : null
 
@@ -26,6 +31,7 @@ export default function ExamCard({ exam, onClick }) {
       <div className="exam-card-bottom">
         <div className="exam-card-tags">
           <span className="exam-card-date">{fmtDate(date)}</span>
+          {studentId && <span className="tag tag-student"><i className="fa-regular fa-id-card" /> {studentId}</span>}
           {typeTag}
           {placeTag}
         </div>

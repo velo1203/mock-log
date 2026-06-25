@@ -55,6 +55,7 @@ VITE_CSV_URL=https://docs.google.com/spreadsheets/d/e/YOUR_SHEET_ID/pub?output=c
 | 컬럼 | 필수 | 설명 | 값 |
 |------|------|------|----|
 | `name` | ✅ | 시험 이름 | 예: `6월 모의고사` |
+| `studentId` | ✅ | 학번 | 예: `3311` |
 | `date` | ✅ | 날짜 | `YYYY-MM-DD` |
 | `subject` | ✅ | 과목 | `math` / `korean` |
 | `type` | ✅ | 유형 | `full` / `half` |

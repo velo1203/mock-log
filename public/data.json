@@ -2,6 +2,7 @@
     {
         "id": "example1",
         "name": "시대인재 브릿지 01",
+        "studentId": "3311",
         "date": "2026-03-14",
         "subject": "math",
         "type": "half",
@@ -12,6 +13,7 @@
     {
         "id": "example2",
         "name": "2024 고3 3월 모의고사",
+        "studentId": "3311",
         "date": "2026-03-15",
         "subject": "math",
         "type": "full",
@@ -22,6 +24,7 @@
     {
         "id": "example3",
         "name": "시대인재 브릿지 02",
+        "studentId": "3311",
         "date": "2026-03-21",
         "subject": "math",
         "type": "half",

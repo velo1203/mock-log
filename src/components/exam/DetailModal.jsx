@@ -17,8 +17,13 @@ function DetailRow({ icon, label, value }) {
   )
 }
 
+function getStudentId(exam) {
+  return exam.studentId || exam.studentNumber || exam['학번'] || ''
+}
+
 export default function DetailModal({ exam, onClose }) {
   const { name, date, type, place, score, memo } = exam
+  const studentId = getStudentId(exam)
 
   useEffect(() => {
     const handler = e => { if (e.key === 'Escape') onClose() }
@@ -40,6 +45,7 @@ export default function DetailModal({ exam, onClose }) {
         <div className="modal-body">
           <div className="detail-grid">
             <DetailRow icon="fa-regular fa-calendar" label="날짜"  value={fmtDate(date)} />
+            <DetailRow icon="fa-regular fa-id-card"  label="학번"  value={studentId || '—'} />
             <DetailRow icon="fa-solid fa-tag"         label="유형"  value={type === 'full' ? '풀모의고사' : '하프모의고사'} />
             <DetailRow icon="fa-regular fa-map"       label="장소"  value={place === 'live' ? '현장' : '집모'} />
             <DetailRow

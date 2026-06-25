@@ -330,6 +330,11 @@ html, body {
   color: var(--text-secondary);
   border: 1px solid rgba(155, 154, 151, 0.35);
 }
+.tag-student {
+  background: rgba(35, 131, 226, 0.08);
+  color: var(--accent);
+  border: 1px solid rgba(35, 131, 226, 0.25);
+}
 
 /* ── Score ── */
 .score {

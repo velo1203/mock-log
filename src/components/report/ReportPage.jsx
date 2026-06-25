@@ -32,18 +32,6 @@ const METHOD_ITEMS = [
   ['기타 참고자료', '기존 개인 기록 방식, 실제 모의고사 데이터, 배포 후 사용 경험을 개선 근거로 삼았다.'],
 ]
 
-const PORTFOLIO_ITEMS = [
-  ['개발환경', 'React 18, Vite, JavaScript, CSS, Google Sheets CSV, Netlify 스타일의 SPA 리다이렉트 설정'],
-  ['개발일정', '3월 기획, 4월 핵심 기능, 5월 UI 개선, 6월 보고서 정리와 시연'],
-  ['문제해결', 'CSV의 따옴표와 줄바꿈을 직접 처리하고, 새로고침 시 라우트가 깨지지 않도록 리다이렉트 파일을 추가했다.'],
-  ['설계화면', '상단 탭, 과목 전환, 필터 바, 카드 리스트, 상세 모달로 반복 사용에 편한 흐름을 만들었다.'],
-  ['개발소스', 'src/App.jsx가 전체 상태와 페이지 분기를 담당하고, hooks와 components 폴더로 역할을 나누었다.'],
-  ['개발노하우', '처음부터 복잡한 백엔드를 붙이지 않고 Google Sheets를 데이터 입력 도구로 사용해 유지보수 부담을 줄였다.'],
-  ['결과물', '모의고사 기록을 최신순으로 확인하고, 과목/유형/장소/검색어 기준으로 빠르게 찾아볼 수 있는 웹앱을 완성했다.'],
-  ['연구보고서', '계획, 과정, 결과, 평가, 포트폴리오 내용을 웹 페이지에서 바로 읽을 수 있도록 정리했다.'],
-  ['발표자료', '시연 중심 발표를 전제로 핵심 기능과 개선 과정을 설명할 수 있게 구성했다.'],
-]
-
 function ReportSection({ eyebrow, title, children }) {
   return (
     <section className="report-section">
@@ -188,14 +176,6 @@ export default function ReportPage() {
       </ReportSection>
 
       <ReportSection eyebrow="포트폴리오" title="5. 결과물 제출 파일 자료 설명">
-        <div className="report-portfolio-grid">
-          {PORTFOLIO_ITEMS.map(([label, text]) => (
-            <div className="report-portfolio-item" key={label}>
-              <h3>{label}</h3>
-              <p>{text}</p>
-            </div>
-          ))}
-        </div>
         <div className="report-demo">
           <div>
             <span className="report-eyebrow">시연</span>

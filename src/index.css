@@ -435,15 +435,13 @@ html, body {
 
 .report-plan-grid,
 .report-evaluation,
-.report-two-column,
-.report-portfolio-grid {
+.report-two-column {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
 }
 
 .report-plan-item,
-.report-portfolio-item,
 .report-evaluation > div,
 .report-teacher-note {
   background: var(--bg-secondary);
@@ -456,7 +454,6 @@ html, body {
 .report-subsection h3,
 .report-two-column h3,
 .report-evaluation h3,
-.report-portfolio-item h3,
 .report-teacher-note h3,
 .report-demo h3 {
   font-size: 0.9375rem;
@@ -855,7 +852,6 @@ html, body {
   .report-plan-grid,
   .report-evaluation,
   .report-two-column,
-  .report-portfolio-grid,
   .report-score-card {
     grid-template-columns: 1fr;
   }

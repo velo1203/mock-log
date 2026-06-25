@@ -11,10 +11,10 @@ export default function Header({ page, onPage }) {
             모의고사
           </button>
           <button
-            className={'site-nav-btn' + (page === 'review' ? ' on' : '')}
-            onClick={() => onPage('review')}
+            className={'site-nav-btn' + (page === 'report' ? ' on' : '')}
+            onClick={() => onPage('report')}
           >
-            후기
+            보고서
           </button>
         </nav>
       </div>

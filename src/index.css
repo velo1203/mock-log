@@ -192,19 +192,6 @@ html, body {
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
-/* ── Review filter bar ── */
-.review-filter-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 12px;
-  margin-bottom: 16px;
-}
-.review-count {
-  font-size: 0.8125rem;
-  color: var(--text-secondary);
-}
-
 /* ── Search ── */
 .filter-area {
   display: flex;
@@ -363,158 +350,249 @@ html, body {
   margin-bottom: 12px;
 }
 
-/* ── Review modal ── */
-.review-modal-body {
-  padding: 24px 24px 28px;
-}
-.review-modal-title-row {
+/* ── Report page ── */
+.report-page {
   display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-.review-modal-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.3;
-  letter-spacing: -0.02em;
-  flex: 1;
-  min-width: 0;
-}
-.review-modal-tags {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.review-modal-divider {
-  height: 1px;
-  background: var(--border);
-  margin: 16px 0;
-}
-.review-modal-text {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  line-height: 1.8;
-  white-space: pre-wrap;
+  flex-direction: column;
+  gap: 20px;
 }
 
-/* ── Tier badge ── */
-.tier-badge {
+.report-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 20px;
+  align-items: stretch;
+  background:
+    linear-gradient(135deg, rgba(35, 131, 226, 0.08), rgba(15, 123, 108, 0.08)),
+    var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.report-kicker,
+.report-eyebrow {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 5px;
-  font-size: 0.8125rem;
+  margin-bottom: 8px;
+  font-size: 0.75rem;
   font-weight: 700;
-  flex-shrink: 0;
+  color: var(--accent);
   letter-spacing: 0;
 }
-.tier-S {
-  background: rgba(223, 171, 1, 0.15);
-  color: #a07c00;
-  border: 1px solid rgba(223, 171, 1, 0.35);
-}
-.tier-A {
-  background: rgba(15, 123, 108, 0.1);
-  color: var(--green);
-  border: 1px solid rgba(15, 123, 108, 0.25);
-}
-.tier-B {
-  background: rgba(35, 131, 226, 0.1);
-  color: var(--accent);
-  border: 1px solid rgba(35, 131, 226, 0.25);
-}
-.tier-C {
-  background: var(--bg-hover);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-strong);
-}
-.tier-D {
-  background: var(--bg-secondary);
-  color: var(--text-placeholder);
-  border: 1px solid var(--border);
+
+.report-hero h2 {
+  font-size: 1.75rem;
+  line-height: 1.25;
+  letter-spacing: 0;
+  margin-bottom: 10px;
 }
 
-/* ── Review sections ── */
-.review-sections {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
+.report-hero p,
+.report-section p {
+  color: var(--text-primary);
+  line-height: 1.8;
 }
-.review-section {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.review-section-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.review-section-line {
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
-.review-section-count {
-  font-size: 0.75rem;
-  color: var(--text-placeholder);
-}
-.review-tier-label {
-  font-size: 0.8125rem;
-  font-weight: 700;
-  white-space: nowrap;
-}
-.tier-text-S { color: #a07c00; }
-.tier-text-A { color: var(--green); }
-.tier-text-B { color: var(--accent); }
-.tier-text-C { color: var(--text-secondary); }
-.tier-text-D { color: var(--text-placeholder); }
-.review-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-}
-.review-card {
-  background: var(--bg-primary);
+
+.report-meta-card {
+  background: rgba(255, 255, 255, 0.78);
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 16px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  transition: background 80ms ease, border-color 80ms ease;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 12px;
+  align-content: center;
 }
-.review-card:hover {
-  background: var(--bg-hover);
-  border-color: var(--border-strong);
+
+.report-meta-card span {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
 }
-.review-card-title {
-  font-size: 1rem;
-  font-weight: 600;
+
+.report-meta-card strong {
+  font-size: 0.875rem;
   color: var(--text-primary);
-  line-height: 1.4;
+  text-align: right;
+}
+
+.report-section {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.report-section-title {
+  font-size: 1.35rem;
+  line-height: 1.35;
+  letter-spacing: 0;
+  margin-bottom: 16px;
+}
+
+.report-lead {
+  font-size: 0.9375rem;
+}
+
+.report-plan-grid,
+.report-evaluation,
+.report-two-column,
+.report-portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.report-plan-item,
+.report-portfolio-item,
+.report-evaluation > div,
+.report-teacher-note {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.report-plan-item h3,
+.report-subsection h3,
+.report-two-column h3,
+.report-evaluation h3,
+.report-portfolio-item h3,
+.report-teacher-note h3,
+.report-demo h3 {
+  font-size: 0.9375rem;
   margin-bottom: 8px;
 }
-.review-card-tags {
+
+.report-subsection {
+  margin-top: 18px;
+}
+
+.report-timeline {
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid var(--border);
+  margin-left: 8px;
+  gap: 12px;
+}
+
+.report-timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 12px;
+  padding-left: 16px;
+}
+
+.report-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.report-month {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.report-method-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.report-method-list div {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.report-method-list strong {
+  color: var(--text-primary);
+}
+
+.report-method-list span {
+  color: var(--text-primary);
+  line-height: 1.7;
+}
+
+.report-score-card {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+  align-items: center;
+  margin-top: 18px;
+  background: rgba(223, 171, 1, 0.1);
+  border: 1px solid rgba(223, 171, 1, 0.35);
+  border-radius: 8px;
+  padding: 18px;
+}
+
+.report-score-card > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.report-score-label {
+  font-size: 0.75rem;
+  color: #a07c00;
+}
+
+.report-score-card strong {
+  font-size: 2.5rem;
+  line-height: 1;
+  color: #a07c00;
+}
+
+.report-teacher-note {
+  margin-top: 18px;
+}
+
+.report-demo {
   display: flex;
   align-items: center;
-  gap: 5px;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 18px;
+  padding: 18px;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border-radius: 8px;
 }
-.review-card-body {
-  font-size: 0.8125rem;
-  color: var(--text-placeholder);
-  line-height: 1.6;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+
+.report-demo p,
+.report-demo .report-eyebrow {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.report-demo h3 {
+  color: var(--bg-primary);
+}
+
+.report-demo-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 160px;
+  height: 40px;
+  padding: 0 16px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 
@@ -773,8 +851,41 @@ html, body {
   .search-row { width: 100%; height: 36px; }
   .search-row:focus-within { width: 100%; }
 
-  /* 후기 그리드 1열 */
-  .review-grid { grid-template-columns: 1fr; }
+  .report-hero,
+  .report-plan-grid,
+  .report-evaluation,
+  .report-two-column,
+  .report-portfolio-grid,
+  .report-score-card {
+    grid-template-columns: 1fr;
+  }
+
+  .report-hero,
+  .report-section {
+    padding: 18px;
+  }
+
+  .report-hero h2 {
+    font-size: 1.35rem;
+  }
+
+  .report-meta-card strong {
+    text-align: left;
+  }
+
+  .report-method-list div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .report-demo {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .report-demo-button {
+    width: 100%;
+  }
 
   /* 카드 태그 크기 축소 */
   .tag { font-size: 0.6875rem; padding: 1px 5px; }

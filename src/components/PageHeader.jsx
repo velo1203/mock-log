@@ -1,12 +1,12 @@
 const TITLES = {
   exam:   '모의고사 시행표',
-  review: '컨텐츠 후기',
+  report: '1인1프로젝트 보고서',
 }
 const META = {
   exam: count => `총 ${count}회 시행`,
 }
 const DESC = {
-  review: '직접 풀어본 수학·국어 컨텐츠들의 솔직한 후기를 남깁니다.',
+  report: '계획서, 결과보고서, 포트폴리오 내용을 블로그 형식으로 정리했습니다.',
 }
 
 export default function PageHeader({ page, count }) {
